@@ -158,3 +158,29 @@ def handler(event, context):
     float(min(udp_port_capacity))
   )
   log.info("Overall idle host capacity of %s" % idle_hosts)
+
+  # STEP 4 - PUBLISH METRICS
+  # Publish container capacity
+  cloudwatch.put_metric_data(
+    Namespace='AWS/ECS',
+    MetricData=[{
+      'MetricName': 'ContainerCapacity',
+      'Dimensions': [{
+        'Name': 'ClusterName',
+        'Value': ecs_cluster.split('/')[-1]
+      }],
+      'Timestamp': datetime.datetime.utcnow(),
+      'Value': container_capacity
+    }])
+  # Publish idle host capacity
+  cloudwatch.put_metric_data(
+    Namespace='AWS/ECS',
+    MetricData=[{
+      'MetricName': 'IdleHostCapacity',
+      'Dimensions': [{
+        'Name': 'ClusterName',
+        'Value': ecs_cluster.split('/')[-1]
+      }],
+      'Timestamp': datetime.datetime.utcnow(),
+      'Value': idle_hosts
+    }])
