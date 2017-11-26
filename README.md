@@ -10,8 +10,8 @@ This function calculates the current capacity of an ECS cluster in terms of the 
 
 The function calculates two metrics and publishes the metrics to the AWS CloudWatch service:
 
-- ContainerCapacity - the current spare capacity of the ECS cluster, expressed in terms of number of containers (integer).  Typically you would *scale out* your ECS cluster when this value drops below (<) 1.
-- IdleHostCapacity - the current number of idle hosts in the ECS cluster, express in terms of number of hosts (float).  Typically you would *scale in* your ECS cluster when this value is greater than (>) 1.0.
+- **ContainerCapacity (integer)** - the current spare capacity of the ECS cluster, expressed in terms of number of containers.  Typically you would *scale out* your ECS cluster when this value drops below (<) 1.
+- **IdleHostCapacity (float)** - the current number of idle hosts in the ECS cluster, express in terms of number of hosts.  Typically you would *scale in* your ECS cluster when this value is greater than (>) 1.0.
 
 ## Branches
 
