@@ -13,6 +13,13 @@ The function calculates two metrics and publishes the metrics to the AWS CloudWa
 - **ContainerCapacity (integer)** - the current spare capacity of the ECS cluster, expressed in terms of number of containers.  Typically you would *scale out* your ECS cluster when this value drops below (<) 1.
 - **IdleHostCapacity (float)** - the current number of idle hosts in the ECS cluster, express in terms of number of hosts.  Typically you would *scale in* your ECS cluster when this value is greater than (>) 1.0.
 
+To perform these calculations, this function expects the following environment variables to be configured:
+
+- `CONTAINER_MAX_MEMORY` (defaults to 993) - defines the maximum amount of memory in MB that needs to be reserved for any container supported by the cluster.
+- `CONTAINER_MAX_CPU` (defaults to 1024) - defines the maximum amount of CPU in CPU units that needs to be reserved for any container supported by the cluster.  For EC2 instances, each CPU core provides 1024 CPU units of capacity.
+- `TCP_PORT_RESOURCES` (optional) - defines a list of static mapped or host TCP ports served by all containers supported by the cluster.  This is expressed in the form `<port1>,<port2>,...<portn>` - e.g. `80,443,8080,8081`
+- `UDP_PORT_RESOURCES` (optional) - defines a list of static mapped or host UDP ports served by all containers supported by the cluster.  This is expressed in the form `<port1>,<port2>,...<portn>` - e.g. `80,443,8080,8081`
+
 ## Branches
 
 This repository contains two branches:
